@@ -97,8 +97,6 @@ export default function ProjectCasePage({
   };
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const mediaQuery = window.matchMedia("(max-width: 900px)");
     const updateGalleryMode = () => setIsMobileGallery(mediaQuery.matches);
 

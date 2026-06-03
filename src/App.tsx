@@ -15,8 +15,6 @@ const APP_TITLE = "Borges UX Portfolio";
 type GlobalCursorVariant = "default" | "media" | "note" | "cta" | "card" | "link";
 
 function getProjectFromLocation() {
-  if (typeof window === "undefined") return null;
-
   const pathname =
     APP_BASE_PATH && window.location.pathname.startsWith(APP_BASE_PATH)
       ? window.location.pathname.slice(APP_BASE_PATH.length) || "/"
@@ -57,21 +55,17 @@ function getCursorVariantFromTarget(target: EventTarget | null): GlobalCursorVar
 }
 
 export default function App() {
-  const [activeProject, setActiveProject] = useState<ProjectCaseSlug | null>(() =>
-    getProjectFromLocation(),
-  );
+  const [activeProject, setActiveProject] = useState<ProjectCaseSlug | null>(getProjectFromLocation);
   const [cursorVariant, setCursorVariant] = useState<GlobalCursorVariant>("default");
   const [cursorVisible, setCursorVisible] = useState(false);
   const [cursorEnabled, setCursorEnabled] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [showMobileDesktopNotice, setShowMobileDesktopNotice] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.innerWidth <= 1024 && !getProjectFromLocation();
-  });
-  const [showLoading, setShowLoading] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return sessionStorage.getItem(LOADING_SESSION_KEY) !== "true";
-  });
+  const [showMobileDesktopNotice, setShowMobileDesktopNotice] = useState(
+    () => window.innerWidth <= 1024 && !getProjectFromLocation(),
+  );
+  const [showLoading, setShowLoading] = useState(
+    () => sessionStorage.getItem(LOADING_SESSION_KEY) !== "true",
+  );
 
   useEffect(() => {
     const handlePopState = () => {
@@ -101,20 +95,16 @@ export default function App() {
   }, [showLoading]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
     if (showLoading) return;
     setShowMobileDesktopNotice(window.innerWidth <= 1024 && !getProjectFromLocation());
   }, [showLoading, activeProject]);
 
   useEffect(() => {
-    if (typeof document === "undefined") return;
-
     const marqueeSource = `${APP_TITLE}   •   `;
     let index = 0;
 
     const updateTitle = () => {
-      const nextTitle = marqueeSource.slice(index) + marqueeSource.slice(0, index);
-      document.title = nextTitle.trim();
+      document.title = (marqueeSource.slice(index) + marqueeSource.slice(0, index)).trim();
       index = (index + 1) % marqueeSource.length;
     };
 
@@ -128,8 +118,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const desktopCursorQuery = window.matchMedia("(min-width: 768px) and (pointer: fine)");
 
     const syncCursorMode = () => {
@@ -142,9 +130,6 @@ export default function App() {
       }
     };
 
-    syncCursorMode();
-    desktopCursorQuery.addEventListener("change", syncCursorMode);
-
     const handleMouseMove = (event: MouseEvent) => {
       if (!desktopCursorQuery.matches) return;
 
@@ -154,13 +139,14 @@ export default function App() {
     };
 
     const handleMouseOut = (event: MouseEvent) => {
-      if (!desktopCursorQuery.matches) return;
-      if (event.relatedTarget !== null) return;
+      if (!desktopCursorQuery.matches || event.relatedTarget !== null) return;
 
       setCursorVisible(false);
       setCursorVariant("default");
     };
 
+    syncCursorMode();
+    desktopCursorQuery.addEventListener("change", syncCursorMode);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseout", handleMouseOut);
 
@@ -170,23 +156,6 @@ export default function App() {
       window.removeEventListener("mouseout", handleMouseOut);
     };
   }, []);
-
-  const getCursorClasses = () => {
-    switch (cursorVariant) {
-      case "media":
-        return "h-16 w-16 border-[3px] bg-[color:var(--cursor-shell)] after:h-4 after:w-4";
-      case "note":
-        return "h-14 w-14 rotate-12 rounded-[8px] border-[2px] bg-[color:var(--cursor-shell)] after:h-4 after:w-4";
-      case "cta":
-        return "h-14 w-28 rounded-full border-[3px] bg-[color:var(--cursor-shell)] after:h-3 after:w-12 after:rounded-full";
-      case "card":
-        return "h-12 w-12 border-[2px] bg-[color:var(--cursor-shell)] after:h-3 after:w-3";
-      case "link":
-        return "h-12 w-24 rounded-full border-[2px] bg-[color:var(--cursor-shell)] after:h-2.5 after:w-8 after:rounded-full";
-      default:
-        return "h-10 w-10 border-[2px] bg-[color:var(--cursor-shell)] after:h-3 after:w-3";
-    }
-  };
 
   const openProject = (slug: ProjectCaseSlug) => {
     const url = new URL(window.location.href);
@@ -213,8 +182,21 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const dismissMobileDesktopNotice = () => {
-    setShowMobileDesktopNotice(false);
+  const getCursorClasses = () => {
+    switch (cursorVariant) {
+      case "media":
+        return "h-16 w-16 border-[3px] bg-[color:var(--cursor-shell)] after:h-4 after:w-4";
+      case "note":
+        return "h-14 w-14 rotate-12 rounded-[8px] border-[2px] bg-[color:var(--cursor-shell)] after:h-4 after:w-4";
+      case "cta":
+        return "h-14 w-28 rounded-full border-[3px] bg-[color:var(--cursor-shell)] after:h-3 after:w-12 after:rounded-full";
+      case "card":
+        return "h-12 w-12 border-[2px] bg-[color:var(--cursor-shell)] after:h-3 after:w-3";
+      case "link":
+        return "h-12 w-24 rounded-full border-[2px] bg-[color:var(--cursor-shell)] after:h-2.5 after:w-8 after:rounded-full";
+      default:
+        return "h-10 w-10 border-[2px] bg-[color:var(--cursor-shell)] after:h-3 after:w-3";
+    }
   };
 
   const project = activeProject ? projectCaseMap[activeProject] : null;
@@ -224,10 +206,7 @@ export default function App() {
       <div
         aria-hidden="true"
         className={`pointer-events-none fixed left-0 top-0 z-[1400] hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[var(--border-subtle)] shadow-[var(--shadow-cursor)] transition-[width,height,opacity,transform,background-color,border-radius] duration-200 ease-out after:rounded-full after:bg-[var(--cursor-core)] after:content-[''] md:flex ${cursorVisible ? "opacity-100" : "opacity-0"} ${getCursorClasses()}`}
-        style={{
-          left: cursorPosition.x,
-          top: cursorPosition.y,
-        }}
+        style={{ left: cursorPosition.x, top: cursorPosition.y }}
       />
 
       {!project && showMobileDesktopNotice ? (
@@ -239,32 +218,29 @@ export default function App() {
         >
           <div
             className="mobile-desktop-notice__backdrop"
-            onClick={dismissMobileDesktopNotice}
+            onClick={() => setShowMobileDesktopNotice(false)}
           />
           <div className="mobile-desktop-notice__card">
             <button
               type="button"
               className="mobile-desktop-notice__close"
               aria-label="Fechar aviso"
-              onClick={dismissMobileDesktopNotice}
+              onClick={() => setShowMobileDesktopNotice(false)}
             >
               ×
             </button>
             <p className="mobile-desktop-notice__eyebrow">Aviso</p>
-            <h2
-              id="mobile-desktop-notice-title"
-              className="mobile-desktop-notice__title"
-            >
+            <h2 id="mobile-desktop-notice-title" className="mobile-desktop-notice__title">
               Para uma melhor experiência
             </h2>
             <p className="mobile-desktop-notice__text">
-              Este portfólio foi pensado principalmente para desktop. Se puder,
-              acesse em uma tela maior para visualizar melhor os detalhes.
+              Este portfólio foi pensado principalmente para desktop. Se puder, acesse
+              em uma tela maior para visualizar melhor os detalhes.
             </p>
             <button
               type="button"
               className="mobile-desktop-notice__button"
-              onClick={dismissMobileDesktopNotice}
+              onClick={() => setShowMobileDesktopNotice(false)}
             >
               Entendi
             </button>

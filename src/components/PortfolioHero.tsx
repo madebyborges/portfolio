@@ -1,16 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import macbookImg from "../../photos/MACBOOK.avif";
-import mobileNotebookImg from "../assets/notabeook-mobile.png";
-import mobileHeadphoneImg from "../assets/headphone-mobile.png";
-import mobileCameraImg from "../assets/camera-mobile.png";
-import mobilePlantImg from "../assets/plant-mobile.png";
-import mobileCoffeeImg from "../assets/coffee-mobile.png";
-import mobileTicketImg from "../assets/ticket-mobile.png";
-import mobileGlassesImg from "../assets/glasses-mobile.png";
-import mobilePaperImg from "../assets/paper-mobile.png";
-import mobilePostItImg from "../assets/postit-mobile.png";
-import mobileClipsImg from "../assets/clips-mobile.png";
-import mobileClipImg from "../assets/clip-mobile.png";
 import headphoneImg from "../../photos/HEADPHONE.png";
 import cameraImg from "../../photos/CAMERA-ZVE10.png";
 import cappuccinoImg from "../../photos/CAPUCCINO.avif";
@@ -21,11 +10,22 @@ import ticketDarkImg from "../../photos/ticket-dark-theme.png";
 import clipImg from "../../photos/CLIP.avif";
 import plantaImg from "../../photos/PLANTA.avif";
 import papelAmassadoImg from "../../photos/PAPEL-AMASSADO.avif";
-import glassesHeroImg from "../assets/glasses-hero.png";
-import macbookAudio from "../../audio/macbook-sound-effect.mp3";
-import headphoneAudio from "../../audio/headphone-audio-3-AM Coding Session - Lofi Hip Hop Mix [Study & Coding Beats] - Lofi Ghostie.mp3";
 import cameraAudio from "../../audio/camera-sound-effect.mp3";
+import headphoneAudio from "../../audio/headphone-audio-3-AM Coding Session - Lofi Hip Hop Mix [Study & Coding Beats] - Lofi Ghostie.mp3";
+import macbookAudio from "../../audio/macbook-sound-effect.mp3";
 import ticketAudio from "../../audio/ticket-audio.mp3";
+import mobileCameraImg from "../assets/camera-mobile.png";
+import mobileClipImg from "../assets/clip-mobile.png";
+import mobileClipsImg from "../assets/clips-mobile.png";
+import mobileCoffeeImg from "../assets/coffee-mobile.png";
+import glassesHeroImg from "../assets/glasses-hero.png";
+import mobileGlassesImg from "../assets/glasses-mobile.png";
+import mobileHeadphoneImg from "../assets/headphone-mobile.png";
+import mobileNotebookImg from "../assets/notabeook-mobile.png";
+import mobilePaperImg from "../assets/paper-mobile.png";
+import mobilePlantImg from "../assets/plant-mobile.png";
+import mobilePostItImg from "../assets/postit-mobile.png";
+import mobileTicketImg from "../assets/ticket-mobile.png";
 import SiteHeader, { type ThemeMode } from "./SiteHeader";
 
 const audioByItem = {
@@ -35,110 +35,51 @@ const audioByItem = {
   ticket: ticketAudio,
 } as const;
 
-const decorativeItems = [
-  // ====== NOTEBOOK ======
-  {
-    key: "notebook",
-    type: "image",
-    src: macbookImg,
-    alt: "",
-    className: "hero-scene-item hero-scene-item--notebook",
-    animation: "heroFloat 6.2s cubic-bezier(0.4,0,0.2,1) infinite",
-  },
-  // ====== HEADPHONE ======
-  {
-    key: "headphone",
-    type: "image",
-    src: headphoneImg,
-    alt: "",
-    className: "hero-scene-item hero-scene-item--headphone",
-    animation: "heroFloat 6.8s cubic-bezier(0.4,0,0.2,1) infinite",
-  },
-  // ====== CAFE ======
-  {
-    key: "cafe",
-    type: "image",
-    src: cappuccinoImg,
-    alt: "",
-    className: "hero-scene-item hero-scene-item--cafe",
-    animation: "heroFloat 6.4s cubic-bezier(0.4,0,0.2,1) infinite",
-  },
-  // ====== CAMERA ======
-  {
-    key: "camera",
-    type: "image",
-    src: cameraImg,
-    alt: "",
-    className: "hero-scene-item hero-scene-item--camera",
-    animation: "heroFloat 7.4s cubic-bezier(0.4,0,0.2,1) infinite",
-  },
-  // ====== PRENDEDORES ======
-  {
-    key: "prendedores",
-    type: "image",
-    src: prendedoresImg,
-    alt: "",
-    className: "hero-scene-item hero-scene-item--prendedores",
-    animation: "heroFloat 5.8s cubic-bezier(0.4,0,0.2,1) infinite",
-  },
-  // ====== TICKET ======
-  {
-    key: "ticket",
-    type: "image",
-    src: ticketImg,
-    alt: "",
-    className: "hero-scene-item hero-scene-item--ticket",
-    animation: "heroFloat 6.7s cubic-bezier(0.4,0,0.2,1) infinite",
-  },
-] as const;
+type AudioKey = keyof typeof audioByItem;
+type HeroVisualItem = {
+  key: string;
+  src: string;
+  className: string;
+  animation: string;
+  audio?: AudioKey;
+  cursor?: "media";
+};
 
-function DecorativeItem({
+function HeroDecorativeImage({
   item,
-  onMouseEnter,
-  onMouseLeave,
+  onAudioEnter,
+  onAudioLeave,
 }: {
-  item: (typeof decorativeItems)[number];
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
+  item: HeroVisualItem;
+  onAudioEnter?: (key: AudioKey) => void;
+  onAudioLeave?: (key: AudioKey) => void;
 }) {
-  const isInteractive = item.key in audioByItem;
-  const baseClassName = `${isInteractive ? "pointer-events-auto" : "pointer-events-none"} select-none will-change-transform motion-reduce:transform-none motion-reduce:animate-none`;
-
-  const style = item.animation ? { animation: item.animation } : undefined;
-
-  if (item.type === "image") {
-    return (
-      <img
-        src={item.src}
-        alt={item.alt}
-        aria-hidden="true"
-        className={`${baseClassName} ${item.className}`}
-        style={style}
-        decoding="async"
-        fetchPriority={item.key === "notebook" ? "high" : "auto"}
-        data-cursor={isInteractive ? "media" : undefined}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      />
-    );
-  }
+  const interactiveAudio = item.audio;
 
   return (
-    <div
+    <img
+      src={item.src}
+      alt=""
       aria-hidden="true"
-      className={`${baseClassName} ${item.className}`}
-      style={style}
+      className={`${
+        interactiveAudio ? "pointer-events-auto" : "pointer-events-none"
+      } select-none will-change-transform motion-reduce:transform-none motion-reduce:animate-none ${item.className}`}
+      style={{ animation: item.animation }}
+      decoding="async"
+      data-cursor={item.cursor}
+      onMouseEnter={interactiveAudio ? () => onAudioEnter?.(interactiveAudio) : undefined}
+      onMouseLeave={interactiveAudio ? () => onAudioLeave?.(interactiveAudio) : undefined}
     />
   );
 }
 
 export default function PortfolioHero() {
-  const audioRefs = useRef<Partial<Record<keyof typeof audioByItem, HTMLAudioElement>>>({});
+  const audioRefs = useRef<Partial<Record<AudioKey, HTMLAudioElement>>>({});
   const [headphoneActive, setHeadphoneActive] = useState(false);
   const [theme, setTheme] = useState<ThemeMode>("light");
 
   useEffect(() => {
-    const entries = Object.entries(audioByItem) as Array<[keyof typeof audioByItem, string]>;
+    const entries = Object.entries(audioByItem) as Array<[AudioKey, string]>;
 
     for (const [key, src] of entries) {
       const audio = new Audio(src);
@@ -155,36 +96,37 @@ export default function PortfolioHero() {
   }, []);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const nextTheme: ThemeMode = savedTheme === "dark" ? "dark" : "light";
-
+    const nextTheme: ThemeMode = localStorage.getItem("theme") === "dark" ? "dark" : "light";
     setTheme(nextTheme);
     document.documentElement.setAttribute("data-theme", nextTheme);
   }, []);
 
-  const handleAudioEnter = (key: keyof typeof audioByItem) => {
+  const handleAudioEnter = (key: AudioKey) => {
     const audio = audioRefs.current[key];
-
     if (!audio) return;
 
     audio.currentTime = 0;
-    void audio.play().catch(() => {
-      // Ignore autoplay-style failures until the user interacts again.
-    });
+    void audio.play().catch(() => {});
+
+    if (key === "headphone") {
+      setHeadphoneActive(true);
+    }
   };
 
-  const handleAudioLeave = (key: keyof typeof audioByItem) => {
+  const handleAudioLeave = (key: AudioKey) => {
     const audio = audioRefs.current[key];
-
     if (!audio) return;
 
     audio.pause();
     audio.currentTime = 0;
+
+    if (key === "headphone") {
+      setHeadphoneActive(false);
+    }
   };
 
   const handleToggleTheme = () => {
     const nextTheme: ThemeMode = theme === "light" ? "dark" : "light";
-
     setTheme(nextTheme);
     localStorage.setItem("theme", nextTheme);
     document.documentElement.setAttribute("data-theme", nextTheme);
@@ -192,45 +134,143 @@ export default function PortfolioHero() {
 
   const currentTicketImg = theme === "dark" ? ticketDarkImg : ticketImg;
   const currentMobileTicketImg = theme === "dark" ? ticketDarkImg : mobileTicketImg;
-  const themedDecorativeItems = decorativeItems.map((item) =>
-    item.key === "ticket" ? { ...item, src: currentTicketImg } : item,
-  );
+
+  const mobileItems: HeroVisualItem[] = [
+    {
+      key: "notebook",
+      src: mobileNotebookImg,
+      className: "hero-mobile-item hero-mobile-item--notebook",
+      animation: "heroFloat 6.2s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "headphone",
+      src: mobileHeadphoneImg,
+      className: "hero-mobile-item hero-mobile-item--headphone",
+      animation: "heroFloat 6.8s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "coffee",
+      src: mobileCoffeeImg,
+      className: "hero-mobile-item hero-mobile-item--cafe",
+      animation: "heroFloat 6.4s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "plant",
+      src: mobilePlantImg,
+      className: "hero-mobile-item hero-mobile-item--plant",
+      animation: "heroFloat 6.9s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "camera",
+      src: mobileCameraImg,
+      className: "hero-mobile-item hero-mobile-item--camera",
+      animation: "heroFloat 7.4s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "ticket",
+      src: currentMobileTicketImg,
+      className: "hero-mobile-item hero-mobile-item--ticket",
+      animation: "heroFloat 6.7s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "clip",
+      src: mobileClipImg,
+      className: "hero-mobile-item hero-mobile-item--clip",
+      animation: "heroFloat 6.1s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "glasses",
+      src: mobileGlassesImg,
+      className: "hero-mobile-item hero-mobile-item--glasses",
+      animation: "heroFloat 6.6s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "paper",
+      src: mobilePaperImg,
+      className: "hero-mobile-item hero-mobile-item--paper",
+      animation: "heroFloat 6.3s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "clips",
+      src: mobileClipsImg,
+      className: "hero-mobile-item hero-mobile-item--clips",
+      animation: "heroFloat 6.1s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+  ];
+
+  const desktopItems: HeroVisualItem[] = [
+    {
+      key: "notebook",
+      src: macbookImg,
+      className: "hero-scene-item hero-scene-item--notebook",
+      animation: "heroFloat 6.2s cubic-bezier(0.4,0,0.2,1) infinite",
+      audio: "notebook",
+      cursor: "media",
+    },
+    {
+      key: "headphone",
+      src: headphoneImg,
+      className: "hero-scene-item hero-scene-item--headphone",
+      animation: "heroFloat 6.8s cubic-bezier(0.4,0,0.2,1) infinite",
+      audio: "headphone",
+      cursor: "media",
+    },
+    {
+      key: "cafe",
+      src: cappuccinoImg,
+      className: "hero-scene-item hero-scene-item--cafe",
+      animation: "heroFloat 6.4s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "camera",
+      src: cameraImg,
+      className: "hero-scene-item hero-scene-item--camera",
+      animation: "heroFloat 7.4s cubic-bezier(0.4,0,0.2,1) infinite",
+      audio: "camera",
+      cursor: "media",
+    },
+    {
+      key: "prendedores",
+      src: prendedoresImg,
+      className: "hero-scene-item hero-scene-item--prendedores",
+      animation: "heroFloat 5.8s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "ticket",
+      src: currentTicketImg,
+      className: "hero-scene-item hero-scene-item--ticket",
+      animation: "heroFloat 6.7s cubic-bezier(0.4,0,0.2,1) infinite",
+      audio: "ticket",
+      cursor: "media",
+    },
+    {
+      key: "clip",
+      src: clipImg,
+      className: "hero-scene-item hero-scene-item--clip",
+      animation: "heroFloat 7.2s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "plant",
+      src: plantaImg,
+      className: "hero-scene-item hero-scene-item--plant",
+      animation: "heroFloat 6.3s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "paper",
+      src: papelAmassadoImg,
+      className: "hero-scene-item hero-scene-item--paper",
+      animation: "heroFloat 6.1s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+    {
+      key: "glasses",
+      src: glassesHeroImg,
+      className: "hero-scene-item hero-scene-item--glasses",
+      animation: "heroFloat 6.5s cubic-bezier(0.4,0,0.2,1) infinite",
+    },
+  ];
 
   return (
-    <div
-      className="min-h-screen bg-[var(--bg-frame)] p-[14px] [font-family:Inter,system-ui,sans-serif]"
-    >
-      <style>{`
-        @keyframes heroFloat {
-          0%, 100% { transform: translate3d(0, 0, 0); }
-          50% { transform: translate3d(0, -8px, 0); }
-        }
-
-        @keyframes heroTilt {
-          0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-          50% { transform: translate3d(0, -8px, 0) rotate(-1deg); }
-        }
-
-        @keyframes musicNoteCurveLeft {
-          0% {
-            opacity: 0;
-            transform: translate3d(0, 0, 0) rotate(6deg) scale(0.68);
-          }
-          18% {
-            opacity: 0.95;
-            transform: translate3d(-6px, -8px, 0) rotate(2deg) scale(0.82);
-          }
-          55% {
-            opacity: 0.85;
-            transform: translate3d(-22px, -28px, 0) rotate(-8deg) scale(0.96);
-          }
-          100% {
-            opacity: 0;
-            transform: translate3d(-42px, -68px, 0) rotate(-16deg) scale(1.08);
-          }
-        }
-      `}</style>
-
+    <div className="min-h-screen bg-[var(--bg-frame)] p-[14px] [font-family:Inter,system-ui,sans-serif]">
       <main
         id="home"
         className="relative min-h-[calc(100vh-28px)] overflow-hidden rounded-[32px] bg-[var(--bg-primary)] shadow-[var(--shadow-soft)]"
@@ -249,96 +289,9 @@ export default function PortfolioHero() {
           <SiteHeader homePrefix="" theme={theme} onToggleTheme={handleToggleTheme} />
 
           <section className="hero-mobile-stage relative flex min-h-[calc(100vh-160px)] flex-col items-center justify-start px-3 pb-8 pt-3 text-center md:hidden">
-            <img
-              src={mobileNotebookImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--notebook"
-              decoding="async"
-              fetchPriority="high"
-              style={{ animation: "heroFloat 6.2s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobileHeadphoneImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--headphone"
-              decoding="async"
-              style={{ animation: "heroFloat 6.8s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobileCoffeeImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--cafe"
-              decoding="async"
-              style={{ animation: "heroFloat 6.4s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobilePlantImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--plant"
-              decoding="async"
-              style={{ animation: "heroFloat 6.9s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobileCameraImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--camera"
-              decoding="async"
-              style={{ animation: "heroFloat 7.4s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={currentMobileTicketImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--ticket"
-              decoding="async"
-              style={{ animation: "heroFloat 6.7s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobileClipImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--clip"
-              decoding="async"
-              style={{ animation: "heroFloat 6.1s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobileGlassesImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--glasses"
-              decoding="async"
-              style={{ animation: "heroFloat 6.6s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobilePaperImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--paper"
-              decoding="async"
-              style={{ animation: "heroFloat 6.3s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            <img
-              src={mobileClipsImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-mobile-item hero-mobile-item--clips"
-              decoding="async"
-              style={{ animation: "heroFloat 6.1s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
+            {mobileItems.map((item) => (
+              <HeroDecorativeImage key={item.key} item={item} />
+            ))}
 
             <img
               src={mobilePostItImg}
@@ -377,41 +330,15 @@ export default function PortfolioHero() {
             </a>
           </section>
 
-          <section
-            className="relative hidden min-h-[700px] items-start justify-center py-8 sm:min-h-[760px] md:flex md:min-h-[820px] lg:min-h-[900px]"
-          >
-            {themedDecorativeItems.map((item, index) => (
-              <DecorativeItem
-                key={`${item.key}-${index}`}
+          <section className="relative hidden min-h-[700px] items-start justify-center py-8 sm:min-h-[760px] md:flex md:min-h-[820px] lg:min-h-[900px]">
+            {desktopItems.map((item) => (
+              <HeroDecorativeImage
+                key={item.key}
                 item={item}
-                onMouseEnter={
-                  item.key in audioByItem
-                    ? () => {
-                        handleAudioEnter(item.key as keyof typeof audioByItem);
-                        if (item.key === "headphone") setHeadphoneActive(true);
-                      }
-                    : undefined
-                }
-                onMouseLeave={
-                  item.key in audioByItem
-                    ? () => {
-                        handleAudioLeave(item.key as keyof typeof audioByItem);
-                        if (item.key === "headphone") setHeadphoneActive(false);
-                      }
-                    : undefined
-                }
+                onAudioEnter={handleAudioEnter}
+                onAudioLeave={handleAudioLeave}
               />
             ))}
-
-            {/* ====== CLIP ====== */}
-            <img
-              src={clipImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-scene-item hero-scene-item--clip"
-              decoding="async"
-              style={{ animation: "heroFloat 7.2s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
 
             {headphoneActive ? (
               <div
@@ -439,38 +366,7 @@ export default function PortfolioHero() {
               </div>
             ) : null}
 
-            {/* ====== PLANTA ====== */}
-            <img
-              src={plantaImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-scene-item hero-scene-item--plant"
-              decoding="async"
-              style={{ animation: "heroFloat 6.3s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            {/* ====== PAPEL AMASSADO ====== */}
-            <img
-              src={papelAmassadoImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-scene-item hero-scene-item--paper"
-              decoding="async"
-              style={{ animation: "heroFloat 6.1s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
-            {/* ====== OCULOS ====== */}
-            <img
-              src={glassesHeroImg}
-              alt=""
-              aria-hidden="true"
-              className="hero-scene-item hero-scene-item--glasses"
-              decoding="async"
-              style={{ animation: "heroFloat 6.5s cubic-bezier(0.4,0,0.2,1) infinite" }}
-            />
-
             <div className="relative z-10 mt-[92px] flex w-full max-w-[980px] flex-col items-start px-4 text-left md:mt-[84px] md:px-0 md:pl-[122px]">
-              {/* ====== POST-ITS ====== */}
               <img
                 src={postItImg}
                 alt="Post-its com a frase Insights transformam experiências"
@@ -479,14 +375,11 @@ export default function PortfolioHero() {
                 data-cursor="note"
               />
 
-              {/* ====== TITULO PRINCIPAL ====== */}
               <div className="relative inline-flex flex-col items-start">
-                {/* ====== FAIXA AMARELA SUPERIOR ====== */}
                 <span
                   aria-hidden="true"
                   className="hero-title-highlight absolute left-[-12px] top-[35%] -z-10 h-[32px] w-[63%] rounded-[4px] sm:h-[42px] md:h-[48px] lg:h-[52px]"
                 />
-                {/* ====== FAIXA AMARELA INFERIOR ====== */}
                 <span
                   aria-hidden="true"
                   className="hero-title-highlight absolute bottom-[-2%] left-[-12px] -z-10 h-[32px] w-[103.8%] rounded-[4px] sm:h-[42px] md:h-[48px] lg:h-[52px]"
@@ -499,13 +392,11 @@ export default function PortfolioHero() {
                 </h1>
               </div>
 
-              {/* ====== SUBTITULO ====== */}
               <p className="mt-11 max-w-[780px] text-left text-[23px] font-normal leading-[1] tracking-[-0.045em] text-[var(--text-secondary)] sm:text-[28px] md:max-w-[700px] md:text-[34px] lg:max-w-[760px] lg:text-[38px]">
                 Transformando sistemas complexos
                 <br /> em <span className="font-extrabold">experiências simples e intuitivas</span>
               </p>
 
-              {/* ====== BOTAO CTA ====== */}
               <a
                 href="#projetos"
                 data-cursor="cta"

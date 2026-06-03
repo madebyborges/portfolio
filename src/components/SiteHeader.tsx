@@ -14,8 +14,6 @@ const navItems = [
 ];
 
 function isProjectView() {
-  if (typeof window === "undefined") return false;
-
   const basePath = APP_BASE_URL.replace(/\/$/, "");
   const pathname =
     basePath && window.location.pathname.startsWith(basePath)

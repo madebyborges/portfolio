@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0");
 
 :root {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -145,6 +144,35 @@ html[data-theme="dark"] .hero-cta:hover {
 
 .hero-title-highlight {
   background: var(--accent-primary);
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes musicNoteCurveLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(6deg) scale(0.68);
+  }
+  18% {
+    opacity: 0.95;
+    transform: translate3d(-6px, -8px, 0) rotate(2deg) scale(0.82);
+  }
+  55% {
+    opacity: 0.85;
+    transform: translate3d(-22px, -28px, 0) rotate(-8deg) scale(0.96);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-42px, -68px, 0) rotate(-16deg) scale(1.08);
+  }
 }
 
 .mobile-desktop-notice {

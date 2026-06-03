@@ -1,6 +1,10 @@
 import govBrImg from "../assets/gov-brr.png";
 
-export type ProjectCaseSlug = "govbr-redesign" | "finance-dashboard" | "ecommerce-app" | "educacao-online";
+export type ProjectCaseSlug =
+  | "govbr-redesign"
+  | "finance-dashboard"
+  | "ecommerce-app"
+  | "educacao-online";
 
 export type ProjectCase = {
   slug: ProjectCaseSlug;
@@ -48,18 +52,18 @@ export const projectCases: ProjectCase[] = [
     title: "Gov.br Redesign",
     eyebrow: "Case Study",
     summary:
-      "Redesign conceitual da principal porta de entrada para servicos publicos digitais no Brasil, com foco em clareza, hierarquia da informacao e acesso mais direto aos servicos essenciais.",
+      "Redesign conceitual da principal porta de entrada para serviços públicos digitais no Brasil, com foco em clareza, hierarquia da informação e acesso mais direto aos serviços essenciais.",
     tags: ["UX/UI", "Research", "Prototype"],
     heroImageSrc: govBrImg,
     visualVariant: "gov",
     introLabel: "Projeto conceitual de estudo em UX/UI",
     overview: {
       context:
-        "O Gov.br e a principal porta de entrada para autenticacao, emissao de documentos e interacao com servicos governamentais no Brasil. Por concentrar fluxos criticos em um unico ambiente, a plataforma precisa garantir clareza, eficiencia e acessibilidade para milhoes de usuarios com diferentes niveis de familiaridade digital.",
+        "O Gov.br é a principal porta de entrada para autenticação, emissão de documentos e interação com serviços governamentais no Brasil. Por concentrar fluxos críticos em um único ambiente, a plataforma precisa garantir clareza, eficiência e acessibilidade para milhões de usuários com diferentes níveis de familiaridade digital.",
       problem:
-        "A experiencia atual apresenta excesso de informacoes simultaneas, baixa hierarquia visual e uma organizacao mais centrada no sistema do que no comportamento do usuario. Isso aumenta o esforco cognitivo, dificulta a identificacao de acoes prioritarias e torna tarefas simples mais demoradas do que o necessario.",
+        "A experiência atual apresenta excesso de informações simultâneas, baixa hierarquia visual e uma organização mais centrada no sistema do que no comportamento do usuário. Isso aumenta o esforço cognitivo, dificulta a identificação de ações prioritárias e torna tarefas simples mais demoradas do que o necessário.",
       goal:
-        "Reestruturar a jornada de uso para reduzir a carga cognitiva, melhorar a hierarquia das informacoes e tornar o acesso aos servicos mais direto, intuitivo e eficiente.",
+        "Reestruturar a jornada de uso para reduzir a carga cognitiva, melhorar a hierarquia das informações e tornar o acesso aos serviços mais direto, intuitivo e eficiente.",
     },
     role: {
       scope: "UX/UI Designer",
@@ -68,75 +72,75 @@ export const projectCases: ProjectCase[] = [
       team: "Projeto conceitual individual",
     },
     challengePoints: [
-      "Usuarios com baixo nivel de letramento digital.",
+      "Usuários com baixo nível de letramento digital.",
       "Diferentes perfis e objetivos de uso.",
-      "Alta variedade de servicos e categorias.",
-      "Demandas criticas, como acesso a documentos e autenticacao.",
+      "Alta variedade de serviços e categorias.",
+      "Demandas críticas, como acesso a documentos e autenticação.",
     ],
     process: [
       {
-        title: "Analise da experiencia atual",
+        title: "Análise da experiência atual",
         text:
-          "A analise da plataforma mostrou um padrao recorrente de friccoes: informacoes demais na mesma tela, pouca diferenciacao entre acoes principais e secundarias e uma navegacao que exige interpretacao constante do usuario.",
+          "A análise da plataforma mostrou um padrão recorrente de fricções: informações demais na mesma tela, pouca diferenciação entre ações principais e secundárias e uma navegação que exige interpretação constante do usuário.",
       },
       {
         title: "Descobertas-chave",
         text:
-          "Ficou claro que o problema nao estava na falta de funcionalidade, mas na forma como ela era apresentada. A linguagem, a estrutura e a distribuicao visual nao acompanhavam a logica mental de quem queria apenas resolver uma tarefa.",
+          "Ficou claro que o problema não estava na falta de funcionalidade, mas na forma como ela era apresentada. A linguagem, a estrutura e a distribuição visual não acompanhavam a lógica mental de quem queria apenas resolver uma tarefa.",
       },
       {
-        title: "Direcionamento estrategico",
+        title: "Direcionamento estratégico",
         text:
-          "A partir da premissa de que o usuario nao quer navegar, e sim resolver, o projeto passou a priorizar acoes em vez de informacoes, organizar conteudos com base em tarefas e tornar a navegacao mais previsivel e clara em cada etapa da jornada.",
+          "A partir da premissa de que o usuário não quer navegar, e sim resolver, o projeto passou a priorizar ações em vez de informações, organizar conteúdos com base em tarefas e tornar a navegação mais previsível e clara em cada etapa da jornada.",
       },
     ],
     findings: [
-      "Excesso de informacoes simultaneas sem hierarquia clara.",
-      "Navegacao pouco progressiva, exigindo interpretacao constante.",
-      "Acoes principais sem destaque suficiente.",
-      "Estrutura e linguagem desalinhadas com a logica mental do usuario.",
+      "Excesso de informações simultâneas sem hierarquia clara.",
+      "Navegação pouco progressiva, exigindo interpretação constante.",
+      "Ações principais sem destaque suficiente.",
+      "Estrutura e linguagem desalinhadas com a lógica mental do usuário.",
     ],
     strategicDirections: [
-      "Priorizar acoes em vez de informacoes.",
-      "Organizar conteudos com base em tarefas.",
+      "Priorizar ações em vez de informações.",
+      "Organizar conteúdos com base em tarefas.",
       "Reduzir a carga cognitiva.",
-      "Tornar a navegacao previsivel.",
+      "Tornar a navegação previsível.",
       "Garantir clareza em cada etapa da jornada.",
     ],
     solution: [
       {
         title: "Hierarquia visual mais clara",
         text:
-          "A proposta de redesign reorganiza a interface para destacar acoes principais e reduzir a competicao entre elementos na tela. Com isso, o usuario consegue identificar mais rapidamente o que fazer e onde clicar.",
+          "A proposta de redesign reorganiza a interface para destacar ações principais e reduzir a competição entre elementos na tela. Com isso, o usuário consegue identificar mais rapidamente o que fazer e onde clicar.",
       },
       {
-        title: "Conteudo orientado a tarefas",
+        title: "Conteúdo orientado a tarefas",
         text:
-          "A estrutura foi reformulada para seguir uma logica orientada a tarefas, e nao apenas a categorias internas do sistema. Isso aproxima a interface da intencao real do usuario e encurta o caminho ate a conclusao da acao.",
+          "A estrutura foi reformulada para seguir uma lógica orientada a tarefas, e não apenas a categorias internas do sistema. Isso aproxima a interface da intenção real do usuário e encurta o caminho até a conclusão da ação.",
       },
       {
-        title: "Experiencia mobile priorizada",
+        title: "Experiência mobile priorizada",
         text:
-          "Como grande parte dos acessos acontece por dispositivos moveis, a nova experiencia tambem foi pensada para interacoes mais rapidas, diretas e acessiveis em telas menores, reduzindo etapas e melhorando a escaneabilidade.",
+          "Como grande parte dos acessos acontece por dispositivos móveis, a nova experiência também foi pensada para interações mais rápidas, diretas e acessíveis em telas menores, reduzindo etapas e melhorando a escaneabilidade.",
       },
     ],
     mobile: {
-      title: "Experiencia mobile",
+      title: "Experiência mobile",
       text: [
-        "Outro ponto central foi a priorizacao da experiencia mobile, considerando que grande parte dos acessos acontece por dispositivos moveis e exige interacoes rapidas e diretas.",
-        "A nova interface prioriza acoes objetivas, reduz etapas e melhora a navegacao em telas menores.",
-        "Projetado para uso real: rapido, direto e acessivel.",
+        "Outro ponto central foi a priorização da experiência mobile, considerando que grande parte dos acessos acontece por dispositivos móveis e exige interações rápidas e diretas.",
+        "A nova interface prioriza ações objetivas, reduz etapas e melhora a navegação em telas menores.",
+        "Projetado para uso real: rápido, direto e acessível.",
       ],
     },
     results: [
-      "Reducao do tempo de decisao ao destacar melhor as acoes principais.",
-      "Aumento da eficiencia ao tornar a jornada mais direta e previsivel.",
-      "Melhor compreensao da interface, com menos carga cognitiva e menor chance de erro.",
+      "Redução do tempo de decisão ao destacar melhor as ações principais.",
+      "Aumento da eficiência ao tornar a jornada mais direta e previsível.",
+      "Melhor compreensão da interface, com menos carga cognitiva e menor chance de erro.",
     ],
     conclusion: [
-      "Este projeto propõe uma mudanca de perspectiva: sair de uma estrutura centrada no sistema para uma experiencia centrada no usuario.",
-      "Mais do que uma atualizacao visual, trata-se de uma reestruturacao estrategica da forma como os servicos sao apresentados e consumidos.",
-      "Simplificar nao e remover funcionalidades, e garantir que elas possam ser utilizadas com clareza e direcionamento.",
+      "Este projeto propõe uma mudança de perspectiva: sair de uma estrutura centrada no sistema para uma experiência centrada no usuário.",
+      "Mais do que uma atualização visual, trata-se de uma reestruturação estratégica da forma como os serviços são apresentados e consumidos.",
+      "Simplificar não é remover funcionalidades, e sim garantir que elas possam ser utilizadas com clareza e direcionamento.",
     ],
     nextProject: "finance-dashboard",
   },
@@ -145,16 +149,16 @@ export const projectCases: ProjectCase[] = [
     title: "Finance Dashboard",
     eyebrow: "Case Study",
     summary:
-      "Dashboard financeiro pensado para leitura rapida, comparacao de dados e tomada de decisao com menos ruido.",
+      "Dashboard financeiro pensado para leitura rápida, comparação de dados e tomada de decisão com menos ruído.",
     tags: ["UX/UI", "Dashboard"],
     visualVariant: "finance",
     overview: {
       context:
-        "A proposta do dashboard era transformar dados fragmentados em uma leitura mais objetiva e acionavel para o usuario.",
+        "A proposta do dashboard era transformar dados fragmentados em uma leitura mais objetiva e acionável para o usuário.",
       problem:
-        "O excesso de informacao em interfaces financeiras costuma dificultar entendimento imediato e esconder prioridades importantes.",
+        "O excesso de informação em interfaces financeiras costuma dificultar entendimento imediato e esconder prioridades importantes.",
       goal:
-        "Organizar indicadores, graficos e blocos de apoio em uma experiencia que favorece leitura, foco e controle.",
+        "Organizar indicadores, gráficos e blocos de apoio em uma experiência que favorece leitura, foco e controle.",
     },
     role: {
       scope: "UX/UI Designer",
@@ -164,42 +168,42 @@ export const projectCases: ProjectCase[] = [
     },
     process: [
       {
-        title: "Priorizacao",
+        title: "Priorização",
         text:
-          "Separei os indicadores realmente essenciais daquilo que poderia entrar como apoio secundario.",
+          "Separei os indicadores realmente essenciais daquilo que poderia entrar como apoio secundário.",
       },
       {
         title: "Fluxo de leitura",
         text:
-          "Modelei a tela para funcionar em camadas, permitindo que o usuario entenda o panorama geral antes de aprofundar os dados.",
+          "Modelei a tela para funcionar em camadas, permitindo que o usuário entenda o panorama geral antes de aprofundar os dados.",
       },
       {
-        title: "Consistencia",
+        title: "Consistência",
         text:
-          "Padronizei componentes de cards, graficos e blocos metricos para manter ritmo visual e previsibilidade.",
+          "Padronizei componentes de cards, gráficos e blocos métricos para manter ritmo visual e previsibilidade.",
       },
     ],
     solution: [
       {
         title: "Resumo primeiro",
         text:
-          "O dashboard abre com uma leitura sintetica, criando contexto antes da exploracao detalhada.",
+          "O dashboard abre com uma leitura sintética, criando contexto antes da exploração detalhada.",
       },
       {
-        title: "Comparacao facilitada",
+        title: "Comparação facilitada",
         text:
-          "Os blocos foram desenhados para favorecer contraste entre periodos, valores e status sem sobrecarregar a tela.",
+          "Os blocos foram desenhados para favorecer contraste entre períodos, valores e status sem sobrecarregar a tela.",
       },
       {
         title: "Escala visual clara",
         text:
-          "Titulos, metricas e graficos seguem uma hierarquia que reduz esforco cognitivo e acelera interpretacao.",
+          "Títulos, métricas e gráficos seguem uma hierarquia que reduz esforço cognitivo e acelera interpretação.",
       },
     ],
     results: [
-      "Experiencia mais orientada a decisao.",
-      "Leitura de dados mais rapida e menos cansativa.",
-      "Maior consistencia visual entre componentes analiticos.",
+      "Experiência mais orientada à decisão.",
+      "Leitura de dados mais rápida e menos cansativa.",
+      "Maior consistência visual entre componentes analíticos.",
     ],
     nextProject: "ecommerce-app",
   },
@@ -208,16 +212,16 @@ export const projectCases: ProjectCase[] = [
     title: "E-commerce App",
     eyebrow: "Case Study",
     summary:
-      "Aplicativo com navegacao simplificada e foco em usabilidade para tornar descoberta e checkout mais diretos.",
+      "Aplicativo com navegação simplificada e foco em usabilidade para tornar descoberta e checkout mais diretos.",
     tags: ["UX/UI", "Wireframe", "App"],
     visualVariant: "commerce",
     overview: {
       context:
-        "O desafio foi organizar uma experiencia mobile capaz de equilibrar descoberta de produto e eficiencia de compra.",
+        "O desafio foi organizar uma experiência mobile capaz de equilibrar descoberta de produto e eficiência de compra.",
       problem:
-        "Muitos fluxos de e-commerce aumentam friccao no mobile por excesso de etapas, escolhas e interrupcoes no caminho.",
+        "Muitos fluxos de e-commerce aumentam fricção no mobile por excesso de etapas, escolhas e interrupções no caminho.",
       goal:
-        "Criar um fluxo mais fluido, com menos ruidos de interface e mais confianca durante a jornada de compra.",
+        "Criar um fluxo mais fluido, com menos ruídos de interface e mais confiança durante a jornada de compra.",
     },
     role: {
       scope: "UX/UI Designer",
@@ -229,58 +233,58 @@ export const projectCases: ProjectCase[] = [
       {
         title: "Jornada",
         text:
-          "Mapeei descoberta, detalhe de produto, carrinho e checkout para identificar onde a experiencia perdia ritmo.",
+          "Mapeei descoberta, detalhe de produto, carrinho e checkout para identificar onde a experiência perdia ritmo.",
       },
       {
-        title: "Reducao de friccao",
+        title: "Redução de fricção",
         text:
-          "Agrupei informacoes, removi excesso de passos e busquei tornar cada decisao mais evidente para o usuario.",
+          "Agrupei informações, removi excesso de passos e busquei tornar cada decisão mais evidente para o usuário.",
       },
       {
         title: "Refino mobile",
         text:
-          "Ajustei espacamentos, areas clicaveis e hierarquia de componentes para uma navegacao mais intuitiva em telas menores.",
+          "Ajustei espaçamentos, áreas clicáveis e hierarquia de componentes para uma navegação mais intuitiva em telas menores.",
       },
     ],
     solution: [
       {
         title: "Descoberta mais clara",
         text:
-          "A navegacao ajuda o usuario a localizar categorias e produtos sem excesso de interferencia visual.",
+          "A navegação ajuda o usuário a localizar categorias e produtos sem excesso de interferência visual.",
       },
       {
         title: "Detalhe objetivo",
         text:
-          "As informacoes mais importantes do produto aparecem com prioridade, favorecendo comparacao e decisao.",
+          "As informações mais importantes do produto aparecem com prioridade, favorecendo comparação e decisão.",
       },
       {
         title: "Checkout mais direto",
         text:
-          "O fluxo reduz interrupcoes e deixa a conclusao da compra mais previsivel e segura.",
+          "O fluxo reduz interrupções e deixa a conclusão da compra mais previsível e segura.",
       },
     ],
     results: [
       "Jornada mobile mais fluida.",
-      "Menos atrito entre navegacao e compra.",
-      "Maior sensacao de clareza durante o checkout.",
+      "Menos atrito entre navegação e compra.",
+      "Maior sensação de clareza durante o checkout.",
     ],
     nextProject: "educacao-online",
   },
   {
     slug: "educacao-online",
-    title: "Educacao Online",
+    title: "Educação Online",
     eyebrow: "Case Study",
     summary:
-      "Plataforma educacional pensada para consumo de conteudo, navegacao simples e boa retencao ao longo da jornada.",
+      "Plataforma educacional pensada para consumo de conteúdo, navegação simples e boa retenção ao longo da jornada.",
     tags: ["UX/UI", "E-learning", "Web"],
     visualVariant: "education",
     overview: {
       context:
-        "A proposta foi construir uma experiencia de estudo que equilibrasse clareza de conteudo, continuidade e senso de progresso.",
+        "A proposta foi construir uma experiência de estudo que equilibrasse clareza de conteúdo, continuidade e senso de progresso.",
       problem:
-        "Ambientes educacionais frequentemente perdem usuario por excesso de blocos, navegacao confusa e pouca orientacao sobre o proximo passo.",
+        "Ambientes educacionais frequentemente perdem usuário por excesso de blocos, navegação confusa e pouca orientação sobre o próximo passo.",
       goal:
-        "Organizar a plataforma para tornar o aprendizado mais leve, continuo e facil de acompanhar.",
+        "Organizar a plataforma para tornar o aprendizado mais leve, contínuo e fácil de acompanhar.",
     },
     role: {
       scope: "UX/UI Designer",
@@ -290,42 +294,42 @@ export const projectCases: ProjectCase[] = [
     },
     process: [
       {
-        title: "Mapeamento de conteudo",
+        title: "Mapeamento de conteúdo",
         text:
-          "Estruturei modulos, aulas e trilhas de forma a facilitar leitura de progresso e continuidade.",
+          "Estruturei módulos, aulas e trilhas de forma a facilitar leitura de progresso e continuidade.",
       },
       {
-        title: "Priorizacao de interface",
+        title: "Priorização de interface",
         text:
-          "Defini uma hierarquia mais simples entre navegacao, conteudo principal e elementos de apoio.",
+          "Defini uma hierarquia mais simples entre navegação, conteúdo principal e elementos de apoio.",
       },
       {
         title: "Acompanhamento",
         text:
-          "Refinei estados e componentes para que o usuario entenda onde esta, o que concluiu e qual e o proximo passo.",
+          "Refinei estados e componentes para que o usuário entenda onde está, o que concluiu e qual é o próximo passo.",
       },
     ],
     solution: [
       {
-        title: "Conteudo no centro",
+        title: "Conteúdo no centro",
         text:
           "A tela valoriza a aula e reduz elementos paralelos para manter foco no aprendizado.",
       },
       {
-        title: "Progresso visivel",
+        title: "Progresso visível",
         text:
-          "A experiencia deixa clara a trilha percorrida e reforca senso de continuidade entre modulos.",
+          "A experiência deixa clara a trilha percorrida e reforça senso de continuidade entre módulos.",
       },
       {
-        title: "Navegacao simples",
+        title: "Navegação simples",
         text:
-          "Os caminhos principais foram simplificados para diminuir esforco e aumentar retencao.",
+          "Os caminhos principais foram simplificados para diminuir esforço e aumentar retenção.",
       },
     ],
     results: [
-      "Experiencia educacional mais organizada e leve.",
+      "Experiência educacional mais organizada e leve.",
       "Maior clareza sobre progresso e continuidade.",
-      "Interface mais focada no conteudo e menos dispersa.",
+      "Interface mais focada no conteúdo e menos dispersa.",
     ],
     nextProject: "govbr-redesign",
   },
